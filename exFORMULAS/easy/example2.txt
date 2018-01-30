@@ -1,0 +1,7 @@
+c
+c start with comments
+c
+c 
+p cnf 2 2
+1 2 0
+-1 2 0

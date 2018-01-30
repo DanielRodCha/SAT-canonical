@@ -1,0 +1,64 @@
+#+TITLE: SAT-Solver based on Polynomials
+
+The project aims to solve the famous SAT problem in a efficient way. In order
+to do that it's used a different algorithm based on transforming
+propositional logic formulas into polynomials and then use the independence
+rule (or delta rule). There is further information obout the algorithm in this
+[[ ][paper?]].
+
+The documentation about the modules it's hosted [[https://danielrodcha.github.io/SAT-Pol/][here]].
+
+** exDIMACS
+This directory stores several examples of sets of formulas in DIMACS format. See [[http://www.satcompetition.org/2009/format-benchmarks2009.html][DIMACS format]] for further
+information about it.
+*** Trivial Examples
+**** example1
++ Corresponds to the formula: (p ^ q)
++ It's True
+**** example2
++ Corresponds to the formula: (p ^ q) v (¬p ^ q)
++ It's True
+**** example3
++ Corresponds to the formula: (p ^ q) v (¬p ^ q) v (p ^ ¬q)
++ It's True
+**** example4
++ Corresponds to the formula: (p ^ q) v (¬p ^ q) v (p ^ ¬q) v (¬p ^ ¬q)
++ It's False
+*** Medium Examples
+**** exampleSat0
+#+BEGIN_SRC hs :tangle yes
+λ> main "exDIMACS/medium/exampleSat0.txt"
+True
+(0.08 secs, 70,098,976 bytes)
+#+END_SRC
+**** exampleSat1
+#+BEGIN_SRC hs :tangle yes
+λ> main "exDIMACS/medium/exampleSat1.txt"
+True
+(0.13 secs, 106,008,992 bytes)
+#+END_SRC
+**** exampleSat2
+#+BEGIN_SRC hs :tangle yes
+λ> main "exDIMACS/medium/exampleSat2.txt"
+True
+(53.45 secs, 16,622,296,456 bytes)
+#+END_SRC
+**** exampleSat3
+*** Hard Examples
+**** sat100
++ Has 430 clauses
++ Has 100 variables
++ It's True
+**** sat250
++ Has 1065 clauses
++ Has 250 variables
++ It's True
+**** unsat250
++ Has 1065 clauses
++ Has 250 variables
++ It's False
+#+BEGIN_SRC hs :tangle yes
+λ> main "exDIMACS/hard/unsat250.cnf"
+False
+(1.05 secs, 1,060,011,048 bytes)
+#+END_SRC

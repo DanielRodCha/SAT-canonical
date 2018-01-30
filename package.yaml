@@ -1,0 +1,60 @@
+name: SAT-canonical
+version: '0.1.0.0'
+category: Tool
+author: Daniel R. Chavarria
+maintainer: drodriguez15@us.es
+copyright: Daniel R. Chavarria
+license: BSD3
+homepage: https://github.com/githubuser/SAT-Pol#readme
+extra-source-files:
+- README.org
+dependencies:
+- base
+- HaskellForMaths
+- containers
+- hatt
+- doctest
+- criterion
+- hspec
+- QuickCheck
+- parsec
+library:
+  source-dirs: src
+  exposed-modules:
+  - Logic
+  - Simplification
+  - Canonical
+  - Saturation
+  - LogicParser
+  - Preprocessing
+executables:
+  satCNF:
+    main: Main.hs
+    source-dirs:
+    - app
+    - src
+    - exDIMACS
+tests:
+  spec:
+    main: Main.hs
+    source-dirs:
+    - test-spec
+    - src
+    dependencies:
+    - hspec
+  doctests:
+    main: Main.hs
+    source-dirs:
+    - test-doc
+    - src
+    ghc-options: -threaded
+    dependencies:
+    - doctest-discover
+benchmarks:
+  bench-innit:
+    main: Main.hs
+    source-dirs:
+    - src
+    - bench
+    dependencies:
+    - criterion
