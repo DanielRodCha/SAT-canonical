@@ -29,8 +29,8 @@ instance Show FProp where
     show (F)        = "⊥"
     show (Atom x)   = x
     show (Neg x)    = "-" ++ show x
-    show (Conj x y) = "(" ++ show x ++ " ∧ " ++ show y ++ ")"
-    show (Disj x y) = "(" ++ show x ++ " ∨ " ++ show y ++ ")"
+    show (Conj x y) = "(" ++ show x ++ " & " ++ show y ++ ")"
+    show (Disj x y) = "(" ++ show x ++ " | " ++ show y ++ ")"
     show (Impl x y) = "(" ++ show x ++ " -> " ++ show y ++ ")"
     show (Equi x y) = "(" ++ show x ++ " <-> " ++ show y ++ ")"
 

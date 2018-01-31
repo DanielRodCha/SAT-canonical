@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 458ede1ef561f45234eb630ba8c090cea060661b4e0c819d79e8caec0b4298fc
+-- hash: d7d2a8989b532544f1247272b9df8730445121cb3edafb5354d03d8ad0c943eb
 
 name:           SAT-canonical
 version:        0.1.0.0
@@ -39,9 +39,37 @@ library
       Saturation
       LogicParser
       Preprocessing
-  other-modules:
       Heuristics
       MainFunctions
+  other-modules:
+      Paths_SAT_canonical
+  default-language: Haskell2010
+
+executable sat
+  main-is: Main.hs
+  hs-source-dirs:
+      app2
+      src
+      exFORMULAS
+  build-depends:
+      HaskellForMaths
+    , QuickCheck
+    , base
+    , containers
+    , criterion
+    , doctest
+    , hatt
+    , hspec
+    , parsec
+  other-modules:
+      Canonical
+      Heuristics
+      Logic
+      LogicParser
+      MainFunctions
+      Preprocessing
+      Saturation
+      Simplification
       Paths_SAT_canonical
   default-language: Haskell2010
 

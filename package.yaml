@@ -27,7 +27,15 @@ library:
   - Saturation
   - LogicParser
   - Preprocessing
+  - Heuristics
+  - MainFunctions
 executables:
+  sat:
+    main: Main.hs
+    source-dirs:
+    - app2
+    - src
+    - exFORMULAS
   satCNF:
     main: Main.hs
     source-dirs:
