@@ -271,8 +271,7 @@ True
 #+BEGIN_SRC haskell
 *MainFunctions> satCNF "exDIMACS/medium/exampleSat3.txt" frequency
 The satisfactibility of instance exDIMACS/medium/exampleSat3.txt is:
-True
-(0.34 secs, 42,758,336 bytes)
+
 #+END_SRC
 *** Hard Examples
 **** sat100
