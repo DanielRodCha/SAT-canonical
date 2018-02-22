@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d7d2a8989b532544f1247272b9df8730445121cb3edafb5354d03d8ad0c943eb
+-- hash: 94c7378c8b56347e5c104bdc144ed066afc48a1043d4f95f316a5d3e7283623b
 
 name:           SAT-canonical
 version:        0.1.0.0
@@ -42,6 +42,7 @@ library
       Heuristics
       MainFunctions
   other-modules:
+      WeakBasis
       Paths_SAT_canonical
   default-language: Haskell2010
 
@@ -70,6 +71,7 @@ executable sat
       Preprocessing
       Saturation
       Simplification
+      WeakBasis
       Paths_SAT_canonical
   default-language: Haskell2010
 
@@ -98,6 +100,7 @@ executable satCNF
       Preprocessing
       Saturation
       Simplification
+      WeakBasis
       Paths_SAT_canonical
   default-language: Haskell2010
 
@@ -128,6 +131,7 @@ test-suite doctests
       Preprocessing
       Saturation
       Simplification
+      WeakBasis
       Paths_SAT_canonical
   default-language: Haskell2010
 
@@ -156,6 +160,7 @@ test-suite spec
       Preprocessing
       Saturation
       Simplification
+      WeakBasis
       Paths_SAT_canonical
   default-language: Haskell2010
 
@@ -184,5 +189,6 @@ benchmark bench-innit
       Preprocessing
       Saturation
       Simplification
+      WeakBasis
       Paths_SAT_canonical
   default-language: Haskell2010

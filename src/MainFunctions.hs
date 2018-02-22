@@ -2,10 +2,12 @@ module MainFunctions where
 
 import Logic
 import Heuristics
+import Canonical (canonical)
 import Preprocessing ( dimacs
                      , formulas)
 import Saturation    ( forgetVarKB
                      , saturateKB)
+import WeakBasis
 import System.Environment
 import qualified Data.Set as S
 
@@ -33,9 +35,11 @@ saturateKBSizeTrace ps (v:vs) h | S.member F ps = [((v,S.size ps),False)]
                                    where aux    = forgetVarKB v ps
                                
 satFORMULAS f h = do
- putStrLn ("The satisfactibility of instance " ++ f ++
-           " is:")
  (f',vs) <- formulas f
+ putStrLn ("The KB is:") 
+ print f'
+ putStrLn ("And the satisfactibility of instance " ++ f ++
+           " is:")
  let sol = saturateKB f' (h f' vs) h
  return sol
 

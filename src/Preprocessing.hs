@@ -33,6 +33,6 @@ dimacs f = do
 -- /vs/ is the list of variables wich occurs in any propositional formula.
 formulas f = do
   s0 <- readFile f
-  return $ aux $ foldr (\x acc -> S.insert ((unbox . parseFProp) x) acc) (S.empty) $ lines $ s0
+  return $ aux $ foldr (\x acc -> S.insert ((unbox . parseFProp . init) x) acc) (S.empty) $ lines $ s0
      where aux x           = (x,(varsKB x))
            unbox (Right x) = x
