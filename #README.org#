@@ -7,6 +7,73 @@ information obout it could be found [[ ][here?]].
 
 The documentation about the modules it's hosted [[https://danielrodcha.github.io/SAT-canonical/][here]].
 
+* exDIMACS study
+This directory stores several examples of sets of formulas in DIMACS format. See [[http://www.satcompetition.org/2009/format-benchmarks2009.html][DIMACS format]] for further
+information about it.
+*** Trivial Examples
+**** example1
++ Corresponds to the formula: (p ^ q)
++ It's True
+**** example2
++ Corresponds to the formula: (p ^ q) v (¬p ^ q)
++ It's True
+**** example3
++ Corresponds to the formula: (p ^ q) v (¬p ^ q) v (p ^ ¬q)
++ It's True
+**** example4
++ Corresponds to the formula: (p ^ q) v (¬p ^ q) v (p ^ ¬q) v (¬p ^ ¬q)
++ It's False
+*** Medium Examples
+**** exampleSat0
+#+BEGIN_SRC haskell
+*MainFunctions> satCNF "exDIMACS/medium/exampleSat0.txt" frequency
+The satisfactibility of instance exDIMACS/medium/exampleSat0.txt is:
+True
+(0.15 secs, 16,183,888 bytes)
+#+END_SRC
+**** exampleSat1
+#+BEGIN_SRC haskell
+*MainFunctions> satCNF "exDIMACS/medium/exampleSat1.txt" frequency
+The satisfactibility of instance exDIMACS/medium/exampleSat1.txt is:
+True
+(0.17 secs, 18,794,728 bytes)
+#+END_SRC
+**** exampleSat2
+#+BEGIN_SRC haskell
+*MainFunctions> satCNF "exDIMACS/medium/exampleSat2.txt" frequency
+The satisfactibility of instance exDIMACS/medium/exampleSat2.txt is:
+True
+(0.33 secs, 38,287,824 bytes)
+#+END_SRC
+**** exampleSat3
+#+BEGIN_SRC haskell
+*MainFunctions> satCNF "exDIMACS/medium/exampleSat3.txt" frequency
+The satisfactibility of instance exDIMACS/medium/exampleSat3.txt is:
+
+#+END_SRC
+*** Hard Examples
+**** sat100
++ Has 430 clauses
++ Has 100 variables
++ It's True
+**** sat250
++ Has 1065 clauses
++ Has 250 variables
++ It's True
+**** unsat250
++ Has 1065 clauses
++ Has 250 variables
++ It's False
+#+BEGIN_SRC haskell
+*MainFunctions> satCNF "exDIMACS/hard/unsat250.cnf" frequency
+The satisfactibility of instance exDIMACS/hard/unsat250.cnf is:
+False
+(0.24 secs, 72,635,480 bytes)
+#+END_SRC
+
+
+** References 
+https://github.com/andrepd/haskell-logic/blob/master/logic_parser.hs
 * User guide (Spanish)
 Aquí se describen las pautas a seguir para poder usar la librería,
 suponiendo que el lector no tiene instalados ninguno de los programas
@@ -252,71 +319,3 @@ fromList [((t & p) -> s),((t & q) -> s),((t & r) -> s),(((p & q) & t) -> r)]
 A fin de facilitar la labor al usuario, se incluye la posibilidad de
 calcular directamente una base débil de una KB almacenada en un
 fichero de texto (en uno de los formatos ya comentados).
-
-* exDIMACS study
-This directory stores several examples of sets of formulas in DIMACS format. See [[http://www.satcompetition.org/2009/format-benchmarks2009.html][DIMACS format]] for further
-information about it.
-*** Trivial Examples
-**** example1
-+ Corresponds to the formula: (p ^ q)
-+ It's True
-**** example2
-+ Corresponds to the formula: (p ^ q) v (¬p ^ q)
-+ It's True
-**** example3
-+ Corresponds to the formula: (p ^ q) v (¬p ^ q) v (p ^ ¬q)
-+ It's True
-**** example4
-+ Corresponds to the formula: (p ^ q) v (¬p ^ q) v (p ^ ¬q) v (¬p ^ ¬q)
-+ It's False
-*** Medium Examples
-**** exampleSat0
-#+BEGIN_SRC haskell
-*MainFunctions> satCNF "exDIMACS/medium/exampleSat0.txt" frequency
-The satisfactibility of instance exDIMACS/medium/exampleSat0.txt is:
-True
-(0.15 secs, 16,183,888 bytes)
-#+END_SRC
-**** exampleSat1
-#+BEGIN_SRC haskell
-*MainFunctions> satCNF "exDIMACS/medium/exampleSat1.txt" frequency
-The satisfactibility of instance exDIMACS/medium/exampleSat1.txt is:
-True
-(0.17 secs, 18,794,728 bytes)
-#+END_SRC
-**** exampleSat2
-#+BEGIN_SRC haskell
-*MainFunctions> satCNF "exDIMACS/medium/exampleSat2.txt" frequency
-The satisfactibility of instance exDIMACS/medium/exampleSat2.txt is:
-True
-(0.33 secs, 38,287,824 bytes)
-#+END_SRC
-**** exampleSat3
-#+BEGIN_SRC haskell
-*MainFunctions> satCNF "exDIMACS/medium/exampleSat3.txt" frequency
-The satisfactibility of instance exDIMACS/medium/exampleSat3.txt is:
-
-#+END_SRC
-*** Hard Examples
-**** sat100
-+ Has 430 clauses
-+ Has 100 variables
-+ It's True
-**** sat250
-+ Has 1065 clauses
-+ Has 250 variables
-+ It's True
-**** unsat250
-+ Has 1065 clauses
-+ Has 250 variables
-+ It's False
-#+BEGIN_SRC haskell
-*MainFunctions> satCNF "exDIMACS/hard/unsat250.cnf" frequency
-The satisfactibility of instance exDIMACS/hard/unsat250.cnf is:
-False
-(0.24 secs, 72,635,480 bytes)
-#+END_SRC
-
-
-** References 
-https://github.com/andrepd/haskell-logic/blob/master/logic_parser.hs

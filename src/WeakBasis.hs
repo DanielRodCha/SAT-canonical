@@ -39,40 +39,59 @@ algorithm p xs | (p xs) && (null aux) = [xs]
 
 -----------------------------
 
-algorithm' :: (Eq a) => ([a] -> Bool) -> [a] -> [[a]] -> [[a]]
-algorithm' p [] acc = filter p acc
-algorithm' p vs []  = []
-algorithm' p (v:vs) (x:acc) sol | p x = algorithm' p vs acc (properInsert x sol)
-                                | otherwise = expanse p (v:vs) x `properUnion`
-                                    algorithm' p vs acc
-                               
-expanse p [] _ = []
-expanse p (v:vs) x = algorithm' p vs [v:x] `properUnion` expanse p vs x
+algorithm' :: (Eq a) => ([a] -> Bool) -> ([a],[a]) -> [[a]]
+algorithm' _ (xs,[]) = [xs]
+algorithm' p (xs,ys) | p xs = algorithm'Aux p xs aux
+                     | otherwise = []
+                              where aux = filter (p . fst) (subsequencesAux (xs,ys))
 
-anySubset [] _  = True
-anySubset _ []  = True
-anySubset xs ys = null $ foldr (\ x ys' -> if (elem x ys')
-                                           then (delete y ys)
-                                           else ys xs
-                | otherwise = foldr (\ y acc -> acc && elem y xs) True ys
+algorithm'Aux :: (Eq a) => ([a] -> Bool) -> [a] -> [([a],[a])] -> [[a]]
+algorithm'Aux _ xs []  = [xs]
+algorithm'Aux p _ aux = concatMap (algorithm' p) aux
 
-isSubset xs ys = foldr (\ x acc -> acc && elem x ys) True xs
+subsequencesAux (_,[]) = []
+subsequencesAux ([],_)  = []
+subsequencesAux (xs,(y:ys)) = ((delete y xs,ys):subsequencesAux (xs,ys))
 
-anySubset' xs ys = isSubset xs ys || isSubset ys xs
 
-properInsert x xs = foldr (\y acc -> isSubset x y )
-
-properUnion a b = undefined
-
-weakBasis' kb (v:vs) = algorithm' property vs [[w]|w<-(v:vs)] 
+weakBasis' kb vs = algorithm' property (vs,vs)
                     where property = (decided . forgetVarsKB kb)
+-----------------------------
 
-weakBasisCNF' f = do
- putStrLn ("Weak Basis of instance " ++ f ++
-           " are:")
- (f',vs) <- dimacs f
- let sol = weakBasis' f' vs
- return sol
+-- algorithm' :: (Eq a) => ([a] -> Bool) -> [a] -> [[a]] -> [[a]]
+-- algorithm' p [] acc = filter p acc
+-- algorithm' p vs []  = []
+-- algorithm' p (v:vs) (x:acc) sol | p x = algorithm' p vs acc (properInsert x sol)
+--                                 | otherwise = expanse p (v:vs) x `properUnion`
+--                                     algorithm' p vs acc
+                               
+-- expanse p [] _ = []
+-- expanse p (v:vs) x = algorithm' p vs [v:x] `properUnion` expanse p vs x
+
+-- anySubset [] _  = True
+-- anySubset _ []  = True
+-- anySubset xs ys = null $ foldr (\ x ys' -> if (elem x ys')
+--                                            then (delete y ys)
+--                                            else ys xs
+--                 | otherwise = foldr (\ y acc -> acc && elem y xs) True ys
+
+-- isSubset xs ys = foldr (\ x acc -> acc && elem x ys) True xs
+
+-- anySubset' xs ys = isSubset xs ys || isSubset ys xs
+
+-- properInsert x xs = foldr (\y acc -> isSubset x y )
+
+-- properUnion a b = undefined
+
+-- weakBasis' kb (v:vs) = algorithm' property vs [[w]|w<-(v:vs)] 
+--                     where property = (decided . forgetVarsKB kb)
+
+-- weakBasisCNF' f = do
+--  putStrLn ("Weak Basis of instance " ++ f ++
+--            " are:")
+--  (f',vs) <- dimacs f
+--  let sol = weakBasis' f' vs
+--  return sol
 -----------------------------
 
 weakBasis kb vs = algorithm property vs
@@ -86,7 +105,12 @@ weakBasisCNF f = do
  let sol = weakBasis f' vs
  return sol
 
-
+weakBasisFORMULAS f = do
+ putStrLn ("Weak Basis of instance " ++ f ++
+           " are:")
+ (f',vs) <- formulas f
+ let sol = weakBasis f' vs
+ return sol
 
 
 -- --algorithmAux :: (Eq a) => ([a] -> Bool) -> [[a]] -> [[a]] -> [[a]]
